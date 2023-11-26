@@ -1,0 +1,30 @@
+# .gitlab-ci.yml
+
+stages:
+  - test
+  - deploy
+
+variables:
+  MONGO_URI: "mongodb+srv://adishiro:gintoki@cluster0.wlmssnp.mongodb.net/SE?retryWrites=true&w=majority"  # Adjust as needed
+
+services:
+  - name: mongo:latest
+
+before_script:
+  - python -m venv venv
+  - source venv/bin/activate
+  - pip install -r requirements.txt
+
+test:
+  stage: test
+  script:
+    - python -m unittest discover tests
+
+deploy:
+  stage: deploy
+  only:
+    - master  # Deploy only on changes to the master branch
+  script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+    }
+
+    .receipt {
+      width: 300px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .bill-heading {
+      text-align: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .total {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      font-weight: bold;
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+    }
+    .main {
+        width: 100%;
+        height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } 
+  </style>
+  <title>Bill Receipt</title>
+</head>
+<body>
+
+<div class="main">
+    <div class="receipt">
+        <div class="bill-heading">Bill</div>
+        <hr>
+        <div class="item">
+          <span>Total Hours</span>
+          <span>{{bill.hours}} x {{rent}} = Rs.{{temp}}</span>
+        </div>
+        <div class="item">
+          <span>Driver</span>
+          <span>Rs. 2000</span>
+        </div>
+        <div class="total">
+          <span>Total : Rs. {{amt}}</span>
+          <span><button><a href="/customers">Pay</a></button></span> <!-- You can calculate and replace this value dynamically using JavaScript -->
+        </div>
+      </div>
+</div>
+
+
+</body>
+</html>
